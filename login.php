@@ -32,14 +32,16 @@ if (isset($_SESSION["user"])) {
             //the $user contains every detail about the user.
             if ($user) {
                 if (password_verify($password, $user["password"])) {
-
-                    session_start();
                     $_SESSION["user"] = "yes";
                     //Use the user's ID directly from the fetched result.
-                    $_SESSION["userID"] = $user["userID"];
+                    $_SESSION["userID"] = $user["ID"];
 
+                    $_SESSION["first_name"] = $user["first_name"];
+
+                    $username = $_SESSION["first_name"];
+                    error_log(var_export($_SESSION, 1));
                     header("Location: index.php");
-                    die();
+                    //die();
                 } else {
                     echo "<div class='alert alert-danger'>Password does not match</div>";
                 }
