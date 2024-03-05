@@ -23,20 +23,21 @@ if (!isset($_SESSION["user"])) {
     <?php
     if (isset($_POST['submit'])) {
         $street = $_POST['street'];
-        $houseNumber = $_POST['houseNumber'];
-        $postalNumber = $_POST['postalNumber'];
+        $houseNumber = $_POST['houseNr'];
+        $postalNumber = $_POST['postalNr'];
         $city = $_POST['city'];
         $country = $_POST['country'];
-        $phoneNumber = $_POST['phoneNumber'];
-        $mobileNumber = $_POST['mobileNumber'];
+        $phoneNumber = $_POST['phoneNr'];
+        $mobileNumber = $_POST['mobileNr'];
         $publicEmail = $_POST['publicEmail'];
         $privateEmail = $_POST['privateEmail'];
         $faxNumber = $_POST['faxNumber'];
 
-        $sql = "INSERT INTO address (street, house_Nr,postal_Nr,city, country, phone_Nr, mobile_Nr,public_Email, private_Email,fax_number) VALUES(?,?,?,?,?,?,?,?,?,?)";
-        $stm = mysqli_stmt_init($conn);
-        $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
-        mysqli_stmt_execute($stmt);
+        require_once "database.php";
+
+        $sql = "INSERT INTO info (street, houseNr,postalNr,city, country, phoneNr, mobileNr,publicEmail, privateEmail,faxNumber)
+        VALUES($street,$houseNumber,$postalNumber,$city,$country,$phoneNumber,$mobileNumber,$publi)";
+        
     }
     ?>
 
@@ -50,11 +51,11 @@ if (!isset($_SESSION["user"])) {
     </div>
     <div class="form-group">
         <label>House Number:</label><br>
-        <input type="text" class="form-control" name="houseNumber">
+        <input type="text" class="form-control" name="houseNr">
     </div>
     <div class="form-group">
         <label>Postal Number:</label><br>
-        <input type="text" class="form-control" name="postalNumber">
+        <input type="text" class="form-control" name="postalNr">
     </div>
     <div class="form-group">
         <label>Name of your city:</label><br>
@@ -66,11 +67,11 @@ if (!isset($_SESSION["user"])) {
     </div>
     <div class="form-group">
         <label>Phone number:</label><br>
-        <input type="text" class="form-control" name="phoneNumber">
+        <input type="text" class="form-control" name="phoneNr">
     </div>
     <div class="form-group">
         <label>Mobile number:</label><br>
-        <input type="text" class="form-control" name="mobileNumber">
+        <input type="text" class="form-control" name="mobileNr">
     </div>
     <div class="form-group">
         <label>Public Email:</label><br>
