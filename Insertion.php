@@ -1,9 +1,41 @@
 <?php
+include "database.php";
 session_start();
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
 }
 
+if (isset($_POST['submit'])) {
+    $street = $_POST['street'];
+    $houseNumber = $_POST['houseNr'];
+    $postalNumber = $_POST['postalNr'];
+    $city = $_POST['city'];
+    $country = $_POST['country'];
+    $phoneNumber = $_POST['phoneNr'];
+    $mobileNumber = $_POST['mobileNr'];
+    $publicEmail = $_POST['publicEmail'];
+    $privateEmail = $_POST['privateEmail'];
+    $faxNumber = $_POST['faxNumber'];
+
+    require_once "database.php";
+
+    
+$sql = "INSERT INTO info (`street`, `houseNr`, `postalNr`, `city`, `country`, `phoneNr`, `mobileNr`, `publicEmail`, `privateEmail`, `faxNumber`)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssssss", $street, $houseNumber, $postalNumber, $city, $country, $phoneNumber, $mobileNumber, $publicEmail, $privateEmail, $faxNumber);
+
+    if ($stmt->execute()) {
+    echo "Ihre Daten wurden erfolgreich hochgeladen";
+    header("Location:index.php");
+    } else {
+    echo "Error: " . $stmt->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
 
 ?>
 
@@ -19,83 +51,53 @@ if (!isset($_SESSION["user"])) {
     <title>Data Insertion</title>
 </head>
 
-<body>
-    <?php
-    if (isset($_POST['submit'])) {
-        $street = $_POST['street'];
-        $houseNumber = $_POST['houseNr'];
-        $postalNumber = $_POST['postalNr'];
-        $city = $_POST['city'];
-        $country = $_POST['country'];
-        $phoneNumber = $_POST['phoneNr'];
-        $mobileNumber = $_POST['mobileNr'];
-        $publicEmail = $_POST['publicEmail'];
-        $privateEmail = $_POST['privateEmail'];
-        $faxNumber = $_POST['faxNumber'];
+<body>            
 
-        require_once "database.php";
+   
+<h3>Insert the following data:</h3><br>
 
-        $sql = "INSERT INTO info (street, houseNr,postalNr,city, country, phoneNr, mobileNr,publicEmail, privateEmail,faxNumber)
-        VALUES($street,$houseNumber,$postalNumber,$city,$country,$phoneNumber,$mobileNumber,$publi)";
-        
-    }
-    ?>
-
-
-    <h3>Insert the followng data:</h3><br>
-
-
+<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <div class="form-group">
         <label>Name of the Street:</label><br>
         <input type="text" class="form-control" name="street">
-    </div>
-    <div class="form-group">
-        <label>House Number:</label><br>
-        <input type="text" class="form-control" name="houseNr">
-    </div>
-    <div class="form-group">
-        <label>Postal Number:</label><br>
-        <input type="text" class="form-control" name="postalNr">
-    </div>
-    <div class="form-group">
-        <label>Name of your city:</label><br>
-        <input type="text" class="form-control" name="city">
-    </div>
-    <div class="form-group">
-        <label>Name of your country:</label><br>
-        <input type="text" class="form-control" name="country">
-    </div>
-    <div class="form-group">
-        <label>Phone number:</label><br>
-        <input type="text" class="form-control" name="phoneNr">
-    </div>
-    <div class="form-group">
-        <label>Mobile number:</label><br>
-        <input type="text" class="form-control" name="mobileNr">
-    </div>
-    <div class="form-group">
-        <label>Public Email:</label><br>
-        <input type="text" class="form-control" name="publicEmail">
-    </div>
-    <div class="form-group">
-        <label>Private Email:</label><br>
-        <input type="text" class="form-control" name="privateEmail">
-    </div>
-    <div class="form-group">
-        <label>Fax number:</label><br>
-        <input type="text" class="form-control" name="faxNumber">
-    </div>
 
-    <div class="form-btn">
+        <label> House Nr.</label>
+        <input type="text" class="form-control" name="houseNr">
+
+        
+        <label> Postal Nr.</label>
+        <input type="text" class="form-control" name="postalNr">
+
+        <label> City</label>
+        <input type="text" class="form-control" name="city">
+
+        <label> Country</label>
+        <input type="text" class="form-control" name="country">
+
+        <label> Phone Number</label>
+        <input type="text" class="form-control" name="phoneNr">
+
+        <label> Mobile Number</label>
+        <input type="text" class="form-control" name="mobileNr">
+
+        <label> Public Email</label>
+        <input type="text" class="form-control" name="publicEmail">
+
+        <label> Private Email</label>
+        <input type="text" class="form-control" name="privateEmail">
+
+        <label>Fax Number</label>
+        <input type="text" class= "form-control" name="faxNumber">
+
+    </div>
+    <!-- Other input fields go here -->
+        <div class="form-btn">
         <input type="submit" value="Submit" name="submit" class="btn btn-primary">
     </div>
+</form>
 
-    </form><br><br>
-
-
-
-
-    <a href="index.php">Click here to the main page</a>
+<br><br>
+<a href="index.php">Click here to the main page</a>
 </body>
 
 </html>
