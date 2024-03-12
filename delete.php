@@ -8,10 +8,9 @@ if (!isset($_SESSION["user"])) {
 
 if(isset($_GET['id'])){
     $user_id = $_GET['id'];
-    // Use prepared statement to prevent SQL injection
     $sql = "DELETE FROM info WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $user_id); // Assuming id is an integer
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
 
     if($stmt->affected_rows > 0){

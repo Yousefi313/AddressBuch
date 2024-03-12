@@ -69,6 +69,7 @@ if (isset($_POST['submit'])) {
 
    
 <h3>Insert the following data:</h3><br>
+<h5><a href="index.php">main page</a></h5>
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <div class="form-group">
@@ -104,14 +105,13 @@ if (isset($_POST['submit'])) {
         <input type="text" class= "form-control" name="faxNumber" placeholder = "optionanl">
 
     </div>
-    <!-- Other input fields go here -->
+
         <div class="form-btn">
         <input type="submit" value="Submit" name="submit" class="btn btn-primary">
     </div>
 </form>
 
 <br><br>
-<a href="index.php">Click here to the main page</a>
 </body>
 
 </html>

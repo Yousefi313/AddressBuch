@@ -29,7 +29,7 @@ if (isset($_SESSION["user"])) {
             $sql = "SELECT * FROM users WHERE email = '$email'";
             $result = mysqli_query($conn, $sql);
             $user = mysqli_fetch_array($result, MYSQLI_ASSOC); //Fetch user data
-            //the $user contains every detail about the user.
+  
             if ($user) {
                 if (password_verify($password, $user["password"])) {
                     $_SESSION["user"] = "yes";
