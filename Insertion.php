@@ -17,24 +17,38 @@ if (isset($_POST['submit'])) {
     $privateEmail = $_POST['privateEmail'];
     $faxNumber = $_POST['faxNumber'];
 
-    require_once "database.php";
-
-    
-$sql = "INSERT INTO info (`street`, `houseNr`, `postalNr`, `city`, `country`, `phoneNr`, `mobileNr`, `publicEmail`, `privateEmail`, `faxNumber`)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssssss", $street, $houseNumber, $postalNumber, $city, $country, $phoneNumber, $mobileNumber, $publicEmail, $privateEmail, $faxNumber);
-
-    if ($stmt->execute()) {
-    echo "Ihre Daten wurden erfolgreich hochgeladen";
-    header("Location:index.php");
-    } else {
-    echo "Error: " . $stmt->error;
+    $errors = array();
+    if(empty($street) or empty($houseNumber) or empty($postalNumber) or empty($city) or empty($country) or empty($mobileNumber) or empty($publicEmail)){
+        array_push($errors,"All fields are required");
+    }if(filter_var(!$publicEmail,FILTER_VALIDATE_EMAIL)){
+        array_push($errors,"Email is not valid");
     }
 
-    $stmt->close();
-    $conn->close();
+    require_once "database.php";
+
+    if(count($errors)>0){
+        foreach($errors as $error){
+            echo "<div class = 'alert alert-danger'>$error</div>";
+        }
+    }else{
+        $sql = "INSERT INTO info (`street`, `houseNr`, `postalNr`, `city`, `country`, `phoneNr`, `mobileNr`, `publicEmail`, `privateEmail`, `faxNumber`)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssssssss", $street, $houseNumber, $postalNumber, $city, $country, $phoneNumber, $mobileNumber, $publicEmail, $privateEmail, $faxNumber);
+    
+        if ($stmt->execute()) {
+        echo "Ihre Daten wurden erfolgreich hochgeladen";
+        header("Location:index.php");
+        } else {
+        echo "Error: " . $stmt->error;
+        }
+    
+        $stmt->close();
+        $conn->close();
+    }
+    
+
 }
 
 ?>
@@ -75,19 +89,19 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         <input type="text" class="form-control" name="country">
 
         <label> Phone Number</label>
-        <input type="text" class="form-control" name="phoneNr">
+        <input type="text" class="form-control" name="phoneNr" placeholder = "optional">
 
         <label> Mobile Number</label>
         <input type="text" class="form-control" name="mobileNr">
 
         <label> Public Email</label>
-        <input type="text" class="form-control" name="publicEmail">
+        <input type="email" class="form-control" name="publicEmail">
 
         <label> Private Email</label>
-        <input type="text" class="form-control" name="privateEmail">
+        <input type="email" class="form-control" name="privateEmail" placeholder = "optionanl">
 
         <label>Fax Number</label>
-        <input type="text" class= "form-control" name="faxNumber">
+        <input type="text" class= "form-control" name="faxNumber" placeholder = "optionanl">
 
     </div>
     <!-- Other input fields go here -->

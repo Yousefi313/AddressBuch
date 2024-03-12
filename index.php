@@ -22,19 +22,12 @@ $username = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 <body>
 
     <div class="container">
-        <h1>Welcome to Dashboard, <?php echo $username; ?></h1><br><br>
+        <h1>Welcome to Dashboard, <?php echo ucfirst($username); ?></h1><br><br> <!--The first letter of the username is written in uppercase by ucfirst() method-->
         <h4>The <u>logged-in users</u> are allowed to be here.</h4><br>
         <h3><a href="Insertion.php">Insert your data</a></h3>
 
-        <p>
-            <?php
-
-            echo get_current_user();
-
-            ?>
-        </p>
-
         <a href="logout.php" class="btn btn-warning">Logout</a><br><br>
+        <a href="view.php" class="btn btn-warning">view</a><br><br>
 </body>
 
 </html>
