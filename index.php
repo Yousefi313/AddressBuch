@@ -24,10 +24,20 @@ $username = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
     <div class="container">
         <h1>Welcome to Dashboard, <?php echo ucfirst($username); ?></h1><br><br> <!--The first letter of the username is written in uppercase by ucfirst() method-->
         <h4>The <u>logged-in users</u> are allowed to be here.</h4><br>
-        <h3><a href="Insertion.php">Insert your data</a></h3>
 
-        <a href="logout.php" class="btn btn-warning">Logout</a><br><br>
+        <a href="insertion.php" class="btn btn-warning">Insert the data</a><br><br>
         <a href="view.php" class="btn btn-warning">view</a><br><br>
+        <a href="logout.php" onclick="return myFunction()" class="btn btn-warning">Logout
+            <script>
+                function myFunction(){
+                    if(confirm("Do you really want to delete it?")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            </script>
+        </a><br><br>
 </body>
 
 </html>

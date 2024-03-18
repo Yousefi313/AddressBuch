@@ -58,8 +58,17 @@ $result = $conn->query($sql);
                             <td><?php echo $row['publicEmail']; ?></td>
                             <td><?php echo $row['privateEmail']; ?></td>
                             <td><?php echo $row['faxNumber']; ?></td>
-                            <td><a class="btn btn-info" href="update.php?id=<?php echo $row['ID']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" href="delete.php?id=<?php echo $row['ID']; ?>">Delete</a></td>
+                            <td><a class="btn btn-info" href="update.php?id=<?php echo $row['ID']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" onclick = "return myFunction()" href="delete.php?id=<?php echo $row['ID']; ?>">Delete</a></td>
                         </tr>
+                        <script>
+                function myFunction(){
+                    if(confirm("Do you really want to logout?")){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            </script>
                 <?php
                     }
                 }

@@ -7,12 +7,13 @@ if (!isset($_SESSION["user"])) {
 
 if (isset($_POST['submit'])) {
     $street = $_POST['street'];
+
     $houseNumber = $_POST['houseNr'];
     $postalNumber = $_POST['postalNr'];
     $city = $_POST['city'];
     $country = $_POST['country'];
     $phoneNumber = $_POST['phoneNr'];
-    $mobileNumber = $_POST['mobileNr'];
+    $mobileNumber = $_POST['phoneNr'];
     $publicEmail = $_POST['publicEmail'];
     $privateEmail = $_POST['privateEmail'];
     $faxNumber = $_POST['faxNumber'];
@@ -23,6 +24,42 @@ if (isset($_POST['submit'])) {
     }if(filter_var(!$publicEmail,FILTER_VALIDATE_EMAIL)){
         array_push($errors,"Email is not valid");
     }
+    if(filter_var(!$privateEmail,FILTER_VALIDATE_EMAIL)){
+        array_push($errors,"Email is not valid");
+    }
+    if(filter_var(!$street,FILTER_VALIDATE_STRING)){
+        array_push($errors,"street is not valid");
+    }
+
+/*
+     if (!empty($errors)) {
+        foreach ($errors as $error) {
+            echo $error . "<br>";
+        }
+    }
+ */
+
+    //Data Validation and Sanitization
+
+/*
+      if($_SERVER["REQUEST_METHOD"] === "POST"){
+        $street = test_input($_POST["street"]);
+        $streetError = "";
+        if(!preg_match("/^[a-zA-Z ]*$/",$street)){
+            $streetError = "only letters ans white space allowd";
+        }
+    }
+        function test_input($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+ */
+
+
+
+    //Inserting values to the database
 
     require_once "database.php";
 
@@ -62,6 +99,9 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+
+    <link rel = "stylesheet" href = "phone-number-validation/build/css/demo.css">
+    <link rel = "stylesheet" href = "phone-number-validation/build/css/intlTelInput.css">
     <title>Data Insertion</title>
 </head>
 
@@ -89,11 +129,6 @@ if (isset($_POST['submit'])) {
         <label> Country</label>
         <input type="text" class="form-control" name="country">
 
-        <label> Phone Number</label>
-        <input type="text" class="form-control" name="phoneNr" placeholder = "optional">
-
-        <label> Mobile Number</label>
-        <input type="text" class="form-control" name="mobileNr">
 
         <label> Public Email</label>
         <input type="email" class="form-control" name="publicEmail">
@@ -104,7 +139,14 @@ if (isset($_POST['submit'])) {
         <label>Fax Number</label>
         <input type="text" class= "form-control" name="faxNumber" placeholder = "optionanl">
 
+        <label> Phone Number</label>
+        <input type="text" class="form-control" name="phoneNr" placeholder = "optional">
+
+        <label> Mobile Number</label><br>
+        <input type="tel" class="form-control" id = "phone" name="mobileNr" placeholder = "phone number">   <!--The country codes are here-->
+
     </div>
+
 
         <div class="form-btn">
         <input type="submit" value="Submit" name="submit" class="btn btn-primary">
@@ -112,6 +154,13 @@ if (isset($_POST['submit'])) {
 </form>
 
 <br><br>
+
+<script src = "phone-number-validation/build/js/intlTelInput.js"></script>
+        <script>
+            var input = document.querySelector("#phone");
+            window.intlTelInput(input,{});
+        </script>
+
 </body>
 
 </html>
