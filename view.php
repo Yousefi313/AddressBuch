@@ -23,7 +23,9 @@ $result = $conn->query($sql);
 
     <div class="container">
         <h2>Users</h2>
-        <h3><a href="index.php">main page</a></h3>
+        <div class="form-btn">
+            <a href="index.php" class = "btn btn-primary">Main Page</a>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -62,7 +64,7 @@ $result = $conn->query($sql);
                         </tr>
                         <script>
                 function myFunction(){
-                    if(confirm("Do you really want to logout?")){
+                    if(confirm("Do you really want to delete it?")){
                         return true;
                     }else{
                         return false;

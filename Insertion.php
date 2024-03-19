@@ -27,9 +27,6 @@ if (isset($_POST['submit'])) {
     if(filter_var(!$privateEmail,FILTER_VALIDATE_EMAIL)){
         array_push($errors,"Email is not valid");
     }
-    if(filter_var(!$street,FILTER_VALIDATE_STRING)){
-        array_push($errors,"street is not valid");
-    }
 
 /*
      if (!empty($errors)) {
@@ -109,7 +106,8 @@ if (isset($_POST['submit'])) {
 
    
 <h3>Insert the following data:</h3><br>
-<h5><a href="index.php">main page</a></h5>
+<meta name="theme-color" content="#317EFB"/>
+
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <div class="form-group">
@@ -148,8 +146,9 @@ if (isset($_POST['submit'])) {
     </div>
 
 
-        <div class="form-btn">
-        <input type="submit" value="Submit" name="submit" class="btn btn-primary">
+    <div class="form-btn">
+        <input type="submit" value="Submit" name="submit" class="btn btn-primary"><br><br>
+        <a href="index.php" class = "btn btn-primary">Main Page</a>
     </div>
 </form>
 

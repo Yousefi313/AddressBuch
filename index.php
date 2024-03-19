@@ -30,7 +30,7 @@ $username = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
         <a href="logout.php" onclick="return myFunction()" class="btn btn-warning">Logout
             <script>
                 function myFunction(){
-                    if(confirm("Do you really want to delete it?")){
+                    if(confirm("Do you really want to logout it?")){
                         return true;
                     }else{
                         return false;
