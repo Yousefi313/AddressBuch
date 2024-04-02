@@ -37,7 +37,7 @@ if (isset($_SESSION["user"])) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 array_push($errors, "Email is not valid");
             }
-            if (strlen($password) < 4) { //strlen($password) < 8. I'll edit it later to 8.
+            if (strlen($password) < 8) {
                 array_push($errors, "Password must be at least 8 charactes long");
             }
             if ($password !== $passwordRepeat) {
@@ -56,16 +56,13 @@ if (isset($_SESSION["user"])) {
                 }
             } else {
 
-                //$sql = "INSERT INTO users (first_name,last_name, email, password, date) VALUES ( ?, ?, ?, ?,? )";
                 $sql = "INSERT INTO users (first_name,last_name, email, password) VALUES ( ?, ?, ?, ? )";
                 $stmt = mysqli_stmt_init($conn);
                 $prepareStmt = mysqli_stmt_prepare($stmt, $sql);
                 if ($prepareStmt) {
-                    //mysqli_stmt_bind_param($stmt, "sssss", $firstName, $lastName, $email, $passwordHash,$currentTimestamp);
                     mysqli_stmt_bind_param($stmt, "ssss", $firstName, $lastName, $email, $passwordHash);
                     mysqli_stmt_execute($stmt);
 
-                    //$_SESSION["firstName"] = $firstName;
 
                     echo "<div class='alert alert-success'>You are registered successfully.</div>";
                     header("Location:login.php");
@@ -86,7 +83,7 @@ if (isset($_SESSION["user"])) {
                 <input type="email" class="form-control" name="email" placeholder="Email:">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password:">
+                <input type="password" class="form-control" name="password" placeholder="Password:" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">

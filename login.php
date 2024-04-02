@@ -33,13 +33,13 @@ if (isset($_SESSION["user"])) {
             if ($user) {
                 if (password_verify($password, $user["password"])) {
                     $_SESSION["user"] = "yes";
-                    //Use the user's ID directly from the fetched result.
+
                     $_SESSION["userID"] = $user["ID"];
 
                     $_SESSION["first_name"] = $user["first_name"];
 
                     $username = $_SESSION["first_name"];
-                    error_log(var_export($_SESSION, 1));
+                    //error_log(var_export($_SESSION, 1));
                     header("Location: index.php");
                     //die();
                 } else {

@@ -3,7 +3,7 @@ include "database.php";
 session_start();
 if (!isset($_SESSION["user"])) {
     header("Location: login.php");
-    exit(); // Add exit after header redirection
+    exit();
 }
 
 if (isset($_POST['update'])){
@@ -30,11 +30,9 @@ if (isset($_POST['update'])){
 }
 
 if(isset($_GET['id'])){
-    var_dump($_GET['id']);
     $user_id = $_GET['id'];
     $sql = "SELECT * FROM info WHERE ID = $user_id";
     $result = $conn->query($sql);
-    var_dump($result->num_rows);
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
             $street = $row['street'];
@@ -51,7 +49,7 @@ if(isset($_GET['id'])){
         }
     }
 }
-var_dump($houseNumber);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,12 +59,11 @@ var_dump($houseNumber);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Data Insertion</title>
+    <title>Update Form</title>
 </head>
 <body>            
 
 <h3>Update Form:</h3>
-<h5><a href="index.php">Main Page</a></h5>
 
 <form action="update.php" method="post">
     <div class="form-group">
@@ -100,13 +97,12 @@ var_dump($houseNumber);
         <label>Fax number:</label><br>
         <input type="text" class="form-control" name="faxNumber" value = "<?php echo $faxNumber?>" required>
 
-        <!-- Repeat similar input fields for other columns -->
-
         <input type="hidden" name="user_id" value="<?php echo $id; ?>">
     </div>
     
     <div class="form-btn">
         <input type="submit" name="update" class="btn btn-primary">
+        <a href="index.php" class = "btn btn-primary">Return</a>
     </div>
 </form>
 

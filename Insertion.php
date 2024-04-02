@@ -148,7 +148,7 @@ if (isset($_POST['submit'])) {
 
     <div class="form-btn">
         <input type="submit" value="Submit" name="submit" class="btn btn-primary"><br><br>
-        <a href="index.php" class = "btn btn-primary">Main Page</a>
+        <a href="index.php" class = "btn btn-primary">Return</a>
     </div>
 </form>
 

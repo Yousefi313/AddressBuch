@@ -24,7 +24,7 @@ $result = $conn->query($sql);
     <div class="container">
         <h2>Users</h2>
         <div class="form-btn">
-            <a href="index.php" class = "btn btn-primary">Main Page</a>
+            <a href="index.php" class = "btn btn-primary">Return</a>
         </div>
         <table class="table">
             <thead>
