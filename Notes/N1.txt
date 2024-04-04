@@ -1,0 +1,6 @@
+Search form can be added on the view page
+
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <label for="search_query">Search:</label><br>
+            <input type="text" id="search_query" name="search_query">
+            <button type="submit" name="search">Search</button>

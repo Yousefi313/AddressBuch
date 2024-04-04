@@ -25,6 +25,7 @@ $result = $conn->query($sql);
         <h2>Users</h2>
         <div class="form-btn">
             <a href="index.php" class = "btn btn-primary">Return</a>
+    </form>
         </div>
         <table class="table">
             <thead>
@@ -61,6 +62,7 @@ $result = $conn->query($sql);
                             <td><?php echo $row['privateEmail']; ?></td>
                             <td><?php echo $row['faxNumber']; ?></td>
                             <td><a class="btn btn-info" href="update.php?id=<?php echo $row['ID']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" onclick = "return myFunction()" href="delete.php?id=<?php echo $row['ID']; ?>">Delete</a></td>
+                            
                         </tr>
                         <script>
                 function myFunction(){
