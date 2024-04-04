@@ -22,21 +22,22 @@ if (isset($_SESSION["user"])) {
     <div class="container">
         <?php
         if (isset($_POST["login"])) {
-            $email = $_POST["email"];
-            $password = $_POST["password"];
+            $email = $_POST["email"];   //Retrieving the values of email and
+            $password = $_POST["password"]; // password fields from the submitted form using $_POST
 
             require_once "database.php";
-            $sql = "SELECT * FROM users WHERE email = '$email'";
-            $result = mysqli_query($conn, $sql);
+            $sql = "SELECT * FROM users WHERE email = '$email'";    //Construcing an SQL query to select all columns from the users table where the "email" column matches the submitted email value
+            $result = mysqli_query($conn, $sql);    //Executing the SQL query by passing the database object ($conn) and the SQL query string ($sql) as parameters
             $user = mysqli_fetch_array($result, MYSQLI_ASSOC); //Fetch user data
+            //The above line fetches a single row from the result set as an associative array (MYSQLI_ASSOC) and assigns it to the $user variable. It retrieves the user data based on the email provided.
   
-            if ($user) {
-                if (password_verify($password, $user["password"])) {
-                    $_SESSION["user"] = "yes";
+            if ($user) { //If there is such a user then the following statements happen
+                if (password_verify($password, $user["password"])) { //It checks if the submitted password matches the hashed password stored in the database. 
+                    $_SESSION["user"] = "yes"; //This session variable will be used to check the user's authentication status.
 
                     $_SESSION["userID"] = $user["ID"];
 
-                    $_SESSION["first_name"] = $user["first_name"];
+                    $_SESSION["first_name"] = $user["first_name"]; //This session variable will be used to print the user's first name on the main page
 
                     $username = $_SESSION["first_name"];
                     //error_log(var_export($_SESSION, 1));

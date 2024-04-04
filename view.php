@@ -73,7 +73,7 @@ $result = $conn->query($sql);
             </script>
                 <?php
                     }
-                }
+                }//Here you can use an else statement to show that there is noting to show
                 ?>
             </tbody>
         </table>
