@@ -71,7 +71,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`ID`, `first_name`, `last_name`, `email`, `password`, `date`) VALUES
-(1, 'Hassan', 'Yousefi', 'hassan.yousefi@gmail.com', '$2y$10$CCn1yYraYSKwJO7lvX6o8.P7ntMVlJq9pQ/auZ9Cwq0aUhKC1mTya', '2023-12-04 12:24:33'),
 (2, 'Ulrike', 'Merz', 'ulrike@test.de', '$2y$10$/tG2g7RY8Z8tYANOds5LUuRHu1QdGGg7gK4TKmuoEWKBz2d/gdi.y', '2023-12-04 13:22:29'),
 (3, 'Levi', 'Benath', 'levi@gmail.com', '$2y$10$lpLyqg2Ni/lj158ormh5peO4ICfev7U5TkcBlGaWganovg3bGD5gG', '2023-12-04 13:26:26'),
 (4, 'amjad', 'al Mohammad', 'amjad@gmail.com', '$2y$10$/doOiBMA5PYYt1knYOl8PeMPZRSj3IoiCIVWWQ3T5MGQiJAn4Zj96', '2024-03-05 09:44:40'),
