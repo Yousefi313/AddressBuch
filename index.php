@@ -22,15 +22,30 @@ $username = isset($_SESSION["first_name"]) ? $_SESSION["first_name"] : "Guest";
 <body>
 
     <div class="container">
-        <h1>Welcome to Dashboard, <?php echo ucfirst($username); ?></h1><br><br> <!--The first letter of the username is written in uppercase by ucfirst() method-->
-        <h4>The <u>logged-in users</u> are allowed to be here.</h4><br>
+        <h1>Address Buch</h1><br>
+        <style>
+            h1 {
+                /* text-align: center;
+                text-shadow: 2px 2px 5px red; */
+                font-size: 70px;
+                font-weight: 600;
+                background-image: url(uploads/viola-edible-flowers.jpg);
+                background-size: 250px;
+                background-repeat: repeat;
+                color: transparent;
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+        </style>
+        <h3>Welcome to Dashboard, <?php echo ucfirst($username); ?></h3><br><br> <!--The first letter of the username is written in uppercase by ucfirst() method-->
+        <!-- <h4>The <u>logged-in users</u> are allowed to be here.</h4><br> -->
 
         <a href="insertion.php" class="btn btn-warning">Insert the data</a><br><br>
         <a href="view.php" class="btn btn-warning">view</a><br><br>
         <a href="logout.php" onclick="return myFunction()" class="btn btn-warning">Logout
             <script>
                 function myFunction(){
-                    if(confirm("Do you really want to logout it?")){
+                    if(confirm("Do you really want to logout?")){
                         return true;
                     }else{
                         return false;
