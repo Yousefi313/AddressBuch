@@ -6,8 +6,11 @@ if (!isset($_SESSION["user"])) {
 }
 
 if (isset($_POST['submit'])) {
-    $street = $_POST['street'];
 
+    $vorname = $_POST['vorname'];
+    $nachname = $_POST['nachname'];
+    $firma = $_POST['firma'];
+    $street = $_POST['street'];
     $houseNumber = $_POST['houseNr'];
     $postalNumber = $_POST['postalNr'];
     $city = $_POST['city'];
@@ -19,7 +22,7 @@ if (isset($_POST['submit'])) {
     $faxNumber = $_POST['faxNumber'];
 
     $errors = array();
-    if(empty($street) or empty($houseNumber) or empty($postalNumber) or empty($city) or empty($country) or empty($mobileNumber) or empty($publicEmail)){
+    if(empty($vorname) or empty($nachname) or empty($firma) or empty($street) or empty($houseNumber) or empty($postalNumber) or empty($city) or empty($country) or empty($mobileNumber) or empty($publicEmail)){
         array_push($errors,"All fields are required");
     }if(filter_var(!$publicEmail,FILTER_VALIDATE_EMAIL)){
         array_push($errors,"Email is not valid");
@@ -27,34 +30,6 @@ if (isset($_POST['submit'])) {
     if(filter_var(!$privateEmail,FILTER_VALIDATE_EMAIL)){
         array_push($errors,"Email is not valid");
     }
-
-/*
-     if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
-    }
- */
-
-    //Data Validation and Sanitization
-
-/*
-      if($_SERVER["REQUEST_METHOD"] === "POST"){
-        $street = test_input($_POST["street"]);
-        $streetError = "";
-        if(!preg_match("/^[a-zA-Z ]*$/",$street)){
-            $streetError = "only letters ans white space allowd";
-        }
-    }
-        function test_input($data){
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
- */
-
-
 
     //Inserting values to the database
 
@@ -65,11 +40,11 @@ if (isset($_POST['submit'])) {
             echo "<div class = 'alert alert-danger'>$error</div>";
         }
     }else{
-        $sql = "INSERT INTO info (`street`, `houseNr`, `postalNr`, `city`, `country`, `phoneNr`, `mobileNr`, `publicEmail`, `privateEmail`, `faxNumber`)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO info (`firstName`, `lastName`, `company`,`street`, `houseNr`, `postalNr`, `city`, `country`, `phoneNr`, `mobileNr`, `publicEmail`, `privateEmail`, `faxNumber`)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssssss", $street, $houseNumber, $postalNumber, $city, $country, $phoneNumber, $mobileNumber, $publicEmail, $privateEmail, $faxNumber);
+        $stmt->bind_param("sssssssssssss", $vorname, $nachname, $firma, $street, $houseNumber, $postalNumber, $city, $country, $phoneNumber, $mobileNumber, $publicEmail, $privateEmail, $faxNumber);
     
         if ($stmt->execute()) {
         echo "Ihre Daten wurden erfolgreich hochgeladen";
@@ -105,42 +80,51 @@ if (isset($_POST['submit'])) {
 <body>            
 
    
-<h3>Insert the following data:</h3><br>
+<h3>Geben Sie bitte die folgende Daten:</h3><br>
 <meta name="theme-color" content="#317EFB"/>
 
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <div class="form-group">
-        <label>Name of the Street:</label><br>
-        <input type="text" class="form-control" name="street">
+        <label> Vorname</label>
+        <input type="text" class="form-control" name="vorname">
 
-        <label> House Nr.</label>
+        <label> Nachname</label>
+        <input type="text" class="form-control" name="nachname">
+
+        <label> Name der Firma</label>
+        <input type="text" class="form-control" name="firma">
+
+        <label>Name der Straße:</label><br>
+        <input type="text" class="form-control" name="street" placeholder = "Straßenname Ihres Hauses">
+
+        <label> House Nummer</label>
         <input type="text" class="form-control" name="houseNr">
 
         
-        <label> Postal Nr.</label>
+        <label> Postleitzahl</label>
         <input type="text" class="form-control" name="postalNr">
 
-        <label> City</label>
+        <label> Stadt</label>
         <input type="text" class="form-control" name="city">
 
-        <label> Country</label>
+        <label> Land</label>
         <input type="text" class="form-control" name="country">
 
 
-        <label> Public Email</label>
+        <label> Arbeit Email</label>
         <input type="email" class="form-control" name="publicEmail">
 
         <label> Private Email</label>
         <input type="email" class="form-control" name="privateEmail" placeholder = "optionanl">
 
-        <label>Fax Number</label>
+        <label>Fax Nummer</label>
         <input type="text" class= "form-control" name="faxNumber" placeholder = "optionanl">
 
-        <label> Phone Number</label>
+        <label> Telefonnummer</label>
         <input type="text" class="form-control" name="phoneNr" placeholder = "optional">
 
-        <label> Mobile Number</label><br>
+        <label> Handynummer</label><br>
         <input type="tel" class="form-control" id = "phone" name="mobileNr" placeholder = "phone number">   <!--The country codes are here-->
 
     </div>

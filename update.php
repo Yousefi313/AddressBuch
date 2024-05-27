@@ -67,34 +67,34 @@ if(isset($_GET['id'])){
 
 <form action="update.php" method="post">
     <div class="form-group">
-        <label>Name of the Street:</label><br>
+        <label>Name der Straße:</label><br>
         <input type="text" class="form-control" name="street" id="street" value = "<?php echo $street?>" required>
 
-        <label>House number:</label><br>
+        <label>House Nummer:</label><br>
         <input type="text" class="form-control" name="houseNr" value = "<?php echo $houseNumber?>" required>
 
-        <label>Postal number:</label><br>
+        <label>Postleitzahl:</label><br>
         <input type="text" class="form-control" name="postalNr" value = "<?php echo $postalNumber?>" required>
 
-        <label>Name of the City:</label><br>
+        <label>Stadt:</label><br>
         <input type="text" class="form-control" name="city" value = "<?php echo $city?>" required>
 
-        <label>Name of the Country:</label><br>
+        <label>Land:</label><br>
         <input type="text" class="form-control" name="country" value = "<?php echo $country?>" required>
 
-        <label>Phone number:</label><br>
+        <label>Handynummer:</label><br>
         <input type="text" class="form-control" name="phoneNr" value = "<?php echo $phoneNumber?>" required>
 
-        <label>Mobile number:</label><br>
+        <label>Telefonnummer:</label><br>
         <input type="text" class="form-control" name="mobileNr" value = "<?php echo $mobileNumber?>" required>
 
-        <label>Public Email:</label><br>
+        <label>Öffentliche Email:</label><br>
         <input type="text" class="form-control" name="publicEmail" value = "<?php echo $publicEmail?>" required>
 
         <label>Private Email:</label><br>
         <input type="text" class="form-control" name="privateEmail" value = "<?php echo $privateEmail?>" required>
 
-        <label>Fax number:</label><br>
+        <label>Fax Nummer:</label><br>
         <input type="text" class="form-control" name="faxNumber" value = "<?php echo $faxNumber?>" required>
 
         <input type="hidden" name="user_id" value="<?php echo $id; ?>">
@@ -102,7 +102,7 @@ if(isset($_GET['id'])){
     
     <div class="form-btn">
         <input type="submit" name="update" class="btn btn-primary">
-        <a href="index.php" class = "btn btn-primary">Return</a>
+        <a href="view.php" class = "btn btn-primary">Zurück</a>
     </div>
 </form>
 
