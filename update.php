@@ -7,6 +7,9 @@ if (!isset($_SESSION["user"])) {
 }
 
 if (isset($_POST['update'])){
+    $vorname = $_POST['vorname'];
+    $nachname = $_POST['nachname'];
+    $firma = $_POST['firma'];
     $street = $_POST['street'];
     $houseNumber = $_POST['houseNr'];
     $postalNumber = $_POST['postalNr'];
@@ -19,7 +22,7 @@ if (isset($_POST['update'])){
     $faxNumber = $_POST['faxNumber'];
     $user_id = $_POST['user_id'];
 
-    $sql = "UPDATE info SET street='$street', houseNr='$houseNumber', postalNr='$postalNumber', city='$city', country='$country', phoneNr='$phoneNumber', mobileNr='$mobileNumber', publicEmail='$publicEmail', privateEmail='$privateEmail', faxNumber='$faxNumber' WHERE ID=$user_id";
+    $sql = "UPDATE info SET firstName='$vorname', lastName='$nachname', company='$firma', street='$street', houseNr='$houseNumber', postalNr='$postalNumber', city='$city', country='$country', phoneNr='$phoneNumber', mobileNr='$mobileNumber', publicEmail='$publicEmail', privateEmail='$privateEmail', faxNumber='$faxNumber' WHERE ID=$user_id";
 
     $result = $conn->query($sql); 
     if($result){
@@ -35,6 +38,9 @@ if(isset($_GET['id'])){
     $result = $conn->query($sql);
     if($result->num_rows > 0){
         while($row = $result->fetch_assoc()){
+            $vorname = $row['firstName'];
+            $nachname = $row['lastName'];
+            $firma = $row['company'];
             $street = $row['street'];
             $houseNumber = $row['houseNr'];
             $postalNumber = $row['postalNr'];
@@ -67,6 +73,16 @@ if(isset($_GET['id'])){
 
 <form action="update.php" method="post">
     <div class="form-group">
+
+        <label>Vorname:</label><br>
+        <input type="text" class="form-control" name="vorname" id="vorname" value = "<?php echo $vorname?>" required>
+
+        <label>Nachname:</label><br>
+        <input type="text" class="form-control" name="nachname" id="nachname" value = "<?php echo $nachname?>" required>
+
+        <label>Firma:</label><br>
+        <input type="text" class="form-control" name="firma" id="firma" value = "<?php echo $firma?>" required>
+
         <label>Name der Straße:</label><br>
         <input type="text" class="form-control" name="street" id="street" value = "<?php echo $street?>" required>
 
@@ -102,7 +118,7 @@ if(isset($_GET['id'])){
     
     <div class="form-btn">
         <input type="submit" name="update" class="btn btn-primary">
-        <a href="view.php" class = "btn btn-primary">Zurück</a>
+        <a href="index.php" class = "btn btn-primary">Zurück</a>
     </div>
 </form>
 

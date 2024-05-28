@@ -30,14 +30,14 @@ if ($id > 0) {
     <div class="container">
         <h2>Kontent</h2>
         <div class="form-btn">
-            <a href="view.php" class="btn btn-primary">Zurück</a>
+            <a href="index.php" class="btn btn-primary">Zurück</a>
         </div>
         <table class="table">
             <thead>
                 <tr>
                     <th>Vorname</th>
                     <th>Nachname</th>
-                    <th>Firmaa</th>
+                    <th>Firma</th>
                     <th>Straße</th>
                     <th>House Nr</th>
                     <th>Postleitzahl</th>
